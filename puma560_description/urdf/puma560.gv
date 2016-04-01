@@ -1,0 +1,8 @@
+digraph G {
+node [shape=box];
+"puma_base" [label="puma_base"];
+"puma_link_1" [label="puma_link_1"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"puma_base" -> "base_to_link_1" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"base_to_link_1" -> "puma_link_1"
+}

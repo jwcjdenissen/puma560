@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!-- UNIMATE Puma 560 Manipulator -->
+<robot name="puma560" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="pi" value="3.1415926535897931"/>
+  
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find puma560_description)/urdf/materials.xacro" />
+
+  <!-- Link definitions -->
+
+  <link name="world"/>
+
+  <link name="puma_base">
+    <visual>
+     <origin xyz="0 0 -${.54864+.07493}" rpy="${pi/2} 0 0" />
+     <geometry>
+       <mesh filename="package://puma560_description/meshes/puma_base.stl" />
+     </geometry>
+     <material name="grey"/>
+  </visual>
+</link>
+
+<link name="puma_link_1">
+  <visual>
+   <origin xyz="0 0 0" rpy="-${pi/2} 0 0" />
+   <geometry>
+     <mesh filename="package://puma560_description/meshes/puma_link_1.stl" />
+   </geometry>
+   <material name="metal"/>
+ </visual>
+</link>
+
+<link name="puma_link_2">
+  <visual>
+   <origin xyz="0 0 0" rpy="-${pi/2} 0 0" />
+   <geometry>
+     <mesh filename="package://puma560_description/meshes/puma_link_2.stl" />
+   </geometry>
+   <material name="metal"/>
+ </visual>
+</link>
+
+<link name="puma_link_3">
+  <visual>
+   <origin xyz="0 0 0" rpy="0 0 0" />
+   <geometry>
+     <mesh filename="package://puma560_description/meshes/puma_link_3.stl"/>
+   </geometry>
+   <material name="metal"/>
+ </visual>
+</link>
+
+<link name="puma_link_4">
+  <visual>
+   <origin xyz="0 0 0" rpy="0 -${pi/2} 0" />
+   <geometry>
+     <mesh filename="package://puma560_description/meshes/puma_link_4.stl"/>
+   </geometry>
+   <material name="orange"/>
+ </visual>
+</link>
+
+<link name="puma_link_5">
+  <visual>
+   <origin xyz="0 0 0" rpy="0 0 0" />
+   <geometry>
+     <mesh filename="package://puma560_description/meshes/puma_link_5.stl"/>
+   </geometry>
+   <material name="orange"/>
+ </visual>
+</link>
+
+
+<!-- Joint definitions -->
+
+<joint name="fixed" type="fixed">
+  <parent link="world"/>
+  <child link="puma_base"/>
+  <origin xyz="0 0 ${.54864+.07493}" rpy="0 0 0" />
+</joint>
+
+<joint name="base_to_link_1" type="continuous">
+  <parent link="puma_base"/>
+  <child link="puma_link_1"/>
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <axis xyz="0 0 1"/>
+</joint>
+
+<joint name="link_1_to_link_2" type="continuous">
+  <parent link="puma_link_1"/>
+  <child link="puma_link_2"/>
+  <origin xyz="-${.14224+.0254} 0 0" rpy="0 0 0" />
+  <axis xyz="1 0 0"/>
+</joint>
+
+<joint name="link_2_to_link_3" type="continuous">
+  <parent link="puma_link_2"/>
+  <child link="puma_link_3"/>
+  <origin xyz="0 ${.432} 0" rpy="${pi} 0 0" />
+  <axis xyz="1 0 0"/>
+</joint>
+
+<joint name="link_3_to_link_4" type="continuous">
+  <parent link="puma_link_3"/>
+  <child link="puma_link_4"/>
+  <origin xyz="${.0762/2} -${.35179+.02032} 0" rpy="0 0 0" />
+  <axis xyz="0 1 0"/>
+</joint>
+
+<joint name="link_4_to_link_5" type="continuous">
+  <parent link="puma_link_4"/>
+  <child link="puma_link_5"/>
+  <origin xyz="0 -${.05998} 0" rpy="0 0 0" />
+  <axis xyz="1 0 0"/>
+</joint>
+
+</robot>

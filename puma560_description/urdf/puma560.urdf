@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!-- UNIMATE Puma 560 Manipulator -->
+<robot name="puma560" xmlns:xacro="http://www.ros.org/wiki/xacro">
+ <xacro:property name="pi" value="3.1415926535897931"/>
+
+ <link name="world"/>
+
+ <link name="puma_base">
+  <visual>
+   <origin xyz="0 0 -${.54864+.07493}" rpy="${pi/2} 0 0" />
+   <geometry>
+     <mesh filename="package://puma560_description/meshes/puma_base.stl" scale="0.001 0.001 0.001"/>
+   </geometry>
+   <material name="blue">
+     <color rgba="0 0 .8 1"/>
+   </material>
+ </visual>
+</link>
+
+<link name="puma_link_1">
+  <visual>
+   <origin xyz="0 0 0" rpy="-${pi/2} 0 0" />
+   <geometry>
+     <mesh filename="package://puma560_description/meshes/puma_link_1.stl" scale="0.001 0.001 0.001"/>
+   </geometry>
+   <material name="blue">
+     <color rgba="0 0 0.8 1"/>
+   </material>
+ </visual>
+</link>
+
+<link name="puma_link_2">
+  <visual>
+   <origin xyz="0 0 0" rpy="-${pi/2} 0 0" />
+   <geometry>
+     <mesh filename="package://puma560_description/meshes/puma_link_2.stl" scale="0.001 0.001 0.001"/>
+   </geometry>
+   <material name="blue">
+     <color rgba="0 0 0.8 1"/>
+   </material>
+ </visual>
+</link>
+
+<link name="puma_link_3">
+  <visual>
+   <origin xyz="0 0 0" rpy="0 0 0" />
+   <geometry>
+     <mesh filename="package://puma560_description/meshes/puma_link_3.stl" scale="0.001 0.001 0.001"/>
+   </geometry>
+   <material name="blue">
+     <color rgba="0 0 0.8 1"/>
+   </material>
+ </visual>
+</link>
+
+<joint name="fixed" type="fixed">
+  <parent link="world"/>
+  <child link="puma_base"/>
+  <origin xyz="0 0 ${.54864+.07493}" rpy="0 0 0" />
+</joint>
+
+<joint name="base_to_link_1" type="continuous">
+  <parent link="puma_base"/>
+  <child link="puma_link_1"/>
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <axis xyz="0 0 1"/>
+</joint>
+
+<joint name="link_1_to_link_2" type="continuous">
+  <parent link="puma_link_1"/>
+  <child link="puma_link_2"/>
+  <origin xyz="-${.17} 0 0" rpy="0 0 0" />
+  <axis xyz="1 0 0"/>
+</joint>
+
+<joint name="link_2_to_link_3" type="continuous">
+  <parent link="puma_link_2"/>
+  <child link="puma_link_3"/>
+  <origin xyz="0 ${.432} 0" rpy="${pi} 0 0" />
+  <axis xyz="1 0 0"/>
+</joint>
+
+
+</robot>
