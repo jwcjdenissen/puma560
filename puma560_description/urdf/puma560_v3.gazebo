@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!-- Base link-->
+  <gazebo reference="puma_base">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <!-- Link 1 -->
+  <gazebo reference="puma_link_1">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Metal</material>
+  </gazebo>
+
+  <!-- Link 1 -->
+  <gazebo reference="puma_link_2">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Metal</material>
+  </gazebo>
+
+  <!-- Link 1 -->
+  <gazebo reference="puma_link_3">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Metal</material>
+  </gazebo>
+
+  <!-- Link 1 -->
+  <gazebo reference="puma_link_4">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- Link 1 -->
+  <gazebo reference="puma_link_5">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+
+</robot>

@@ -20,11 +20,7 @@
   <!-- DH parameter for link 2 to link 3 -->
   <xacro:property name="alpha3" value="-${Pi/2}"/>
   <xacro:property name="d3" value="${0.0381}"/>
-  <xacro:property name="a3" value="${0.35179+0.02032}"/>
-
-    <!-- DH parameter for link 2 to link 3 -->
-  <xacro:property name="alpha3" value="-${Pi/2}"/>
-  <xacro:property name="d4" value="${0.05998}"/>
+  <xacro:property name="a3" value="${0.35179}"/>
 
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find puma560_description)/urdf/materials.xacro" />
@@ -73,23 +69,6 @@
 </link>
 
 <link name="puma_link_4">
-  <visual>
-   <origin xyz="0 0 0" rpy="-${Pi/2} 0 0 " />
-   <geometry>
-    <mesh filename="package://puma560_description/meshes/puma_link_4.stl" />
-   </geometry>
-   <material name="grey"/>
- </visual>
-</link>
-
-<link name="puma_link_5">
-  <visual>
-   <origin xyz="0 0 0" rpy="0 ${Pi/2} 0 " />
-   <geometry>
-    <mesh filename="package://puma560_description/meshes/puma_link_5.stl" />
-   </geometry>
-   <material name="grey"/>
- </visual>
 </link>
 
 <!-- Joint definitions -->
@@ -122,17 +101,10 @@
   <axis xyz="0 0 1" />
 </joint>
 
-<joint name="link_3_to_link_4" type="continuous">
+<joint name="link_3_to_link_4" type="fixed">
   <parent link="puma_link_3"/>
   <child link="puma_link_4"/>
-  <origin xyz="${a3} 0 ${d3}" rpy="0 ${Pi/2} 0" />
-  <axis xyz="0 0 1" />
-</joint>
-
-<joint name="link_4_to_link_5" type="continuous">
-  <parent link="puma_link_4"/>
-  <child link="puma_link_5"/>
-  <origin xyz="0 0 ${d4}" rpy="${Pi/2} 0 0" />
+  <origin xyz="${a3} 0 ${d3}" rpy="${alpha3} 0 0" />
   <axis xyz="0 0 1" />
 </joint>
 

@@ -6,7 +6,10 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /RobotModel1
+        - /RobotModel1/Links1
         - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 279
   - Class: rviz/Selection
@@ -93,7 +96,7 @@ Visualization Manager:
       Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
+        All Enabled: false
         puma_base:
           Value: true
         puma_link_1:
@@ -149,15 +152,15 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.204066
-        Y: 0.244239
-        Z: 0.301609
+        X: 0.252605
+        Y: 0.321188
+        Z: 0.303806
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.484797
+      Pitch: 0.609797
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.77857
+      Yaw: 5.70356
     Saved: ~
 Window Geometry:
   Displays:
@@ -175,5 +178,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 960
-  X: 613
-  Y: 292
+  X: 950
+  Y: 14
