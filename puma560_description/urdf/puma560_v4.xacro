@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+
+<!-- UNIMATE Puma 560 Manipulator -->
+<robot name="puma560" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="Pi" value="3.1415926535897931"/>
+
+  <!-- Geometric parameters for base-->
+  <xacro:property name="height_base" value="${.54864}"/>
+
+  <xacro:property name="mass" value="${0}"/> 
+  <xacro:property name="com" value="${[0,0,0,0,0,0]}"/> 
+  <xacro:property name="inertia_diagonals" value="${[0,0,0]}"/> 
+  <xacro:property name="inertia_off_diagonal" value="${[0,0,0]}"/> 
+
+  <xacro:macro name="general_inertia_defition" params="mass com inertia_diagonal inertia_off_diagonal">
+    <inertial>
+      <origin xyz="${com[1]} ${com[2]} ${com[3]}" rpy="${com[4]} ${com[5]} ${com[6]}"/>
+      <mass value="${mass}"/>
+      <inertia 
+        ixx="${inertia_diagonal[1]}"  ixy="${inertia_off_diagonal[2]}" ixz="${inertia_off_diagonal[2]}" 
+        iyy="${inertia_diagonal[2]}"  iyz="${inertia_off_diagonal[3]}"
+        izz="${inertia_diagonal[3]}"
+        />
+      </inertial>
+    </xacro:macro>
+
+    <!-- Import Rviz colors -->
+    <xacro:include filename="$(find puma560_description)/urdf/materials.xacro" />
+
+    <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+    <xacro:include filename="$(find puma560_description)/urdf/puma560.gazebo" />
+
+    <!-- Link definitions -->
+    <link name="world"/>
+
+    <joint name="world" type="fixed">
+      <parent link="world"/>
+      <child link="puma_base"/>
+      <origin xyz="0 0 ${height_base}" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <link name="puma_base">
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://puma560_description/meshes/puma_base.stl" />
+        </geometry>
+        <material name="grey"/>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://puma560_description/meshes/puma_base_collision.stl" />
+        </geometry>
+      </collision>
+</link>
+
+<!--      <xacro:general_inertia_defition
+        mass="42.62416" 
+        com="[-0.000000, 0.021960, -0.356146, 0, 0, 0]" 
+        inertia_diagonal="[1.48565, 1.36144, 0.43392]"
+        inertia_off_diagonal="[0, 0, 0.05984]"
+        />
+      </link>
+
+   <link name="puma_link_1">
+
+    <visual>
+     <origin xyz="0 0 0" rpy="-${Pi/2} 0 -${Pi/2}" />
+     <geometry>
+      <mesh filename="package://puma560_description/meshes/puma_link_1.stl" />
+    </geometry>
+    <material name="metal"/>
+  </visual>
+
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="${m_link_1}"/>
+    <inertia 
+      ixx="${ixx_link_1}"   ixy="${ixy_link_1}"  ixz="${ixz_link_1}"
+      iyy="${iyy_link_1}"   iyz="${iyz_link_1}"
+      izz="${izz_link_1}"
+      />
+    </inertial>
+
+  </link>
+
+  <link name="puma_link_2">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="${Pi} -${Pi/2} 0" />
+      <geometry>
+       <mesh filename="package://puma560_description/meshes/puma_link_2.stl" />
+     </geometry>
+     <material name="metal"/>
+   </visual>
+
+   <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="${m_link_2}"/>
+    <inertia 
+      ixx="${ixx_link_2}"   ixy="${ixy_link_2}"  ixz="${ixz_link_2}"
+      iyy="${iyy_link_2}"   iyz="${iyz_link_2}"
+      izz="${izz_link_2}"
+      />
+    </inertial>
+
+  </link>
+
+  <link name="puma_link_3">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="${Pi/2} -${Pi/2} 0 " />
+      <geometry>
+        <mesh filename="package://puma560_description/meshes/puma_link_3.stl" />
+      </geometry>
+      <material name="metal"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${m_link_3}"/>
+      <inertia 
+        ixx="${ixx_link_3}"   ixy="${ixy_link_3}"  ixz="${ixz_link_3}"
+        iyy="${iyy_link_3}"   iyz="${iyz_link_3}"
+        izz="${izz_link_3}"
+        />
+      </inertial>
+
+    </link>
+
+    <link name="puma_link_4">
+
+      <visual>
+       <origin xyz="0 0 0" rpy="-${Pi/2} 0 0 " />
+       <geometry>
+        <mesh filename="package://puma560_description/meshes/puma_link_4.stl" />
+      </geometry>
+      <material name="grey"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${m_link_4}"/>
+      <inertia 
+        ixx="${ixx_link_4}"   ixy="${ixy_link_4}"  ixz="${ixz_link_4}"
+        iyy="${iyy_link_4}"   iyz="${iyz_link_4}"
+        izz="${izz_link_4}"
+        />
+      </inertial>
+
+    </link>
+
+    <link name="puma_link_5">
+
+      <visual>
+       <origin xyz="0 0 0" rpy="0 ${Pi/2} 0 " />
+       <geometry>
+        <mesh filename="package://puma560_description/meshes/puma_link_5.stl" />
+      </geometry>
+      <material name="grey"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${m_link_5}"/>
+      <inertia 
+        ixx="${ixx_link_5}"   ixy="${ixy_link_5}"  ixz="${ixz_link_5}"
+        iyy="${iyy_link_5}"   iyz="${iyz_link_5}"
+        izz="${izz_link_5}"
+        />
+      </inertial>
+
+    </link> -->
+
+    <!-- Joint definitions -->
+
+
+
+<!--     <joint name="base_to_link_1" type="continuous">
+      <parent link="puma_base"/>
+      <child link="puma_link_1"/>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <joint name="link_1_to_link_2" type="continuous">
+      <parent link="puma_link_1"/>
+      <child link="puma_link_2"/>
+      <origin xyz="0 ${d2} 0" rpy="${alpha1} 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <joint name="link_2_to_link_3" type="continuous">
+      <parent link="puma_link_2"/>
+      <child link="puma_link_3"/>
+      <origin xyz="${a2} 0 0" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <joint name="link_3_to_link_4" type="continuous">
+      <parent link="puma_link_3"/>
+      <child link="puma_link_4"/>
+      <origin xyz="${a3} 0 ${d3}" rpy="0 ${Pi/2} 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <joint name="link_4_to_link_5" type="continuous">
+      <parent link="puma_link_4"/>
+      <child link="puma_link_5"/>
+      <origin xyz="0 0 ${d4}" rpy="${Pi/2} 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+  -->
+
+</robot>

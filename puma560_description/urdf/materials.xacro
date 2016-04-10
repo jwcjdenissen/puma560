@@ -21,6 +21,10 @@
 		<color rgba="0.8 0.0 0.0 1.0"/>
 	</material>
 
+	<material name="red_transparent">
+		<color rgba="0.8 0.0 0.0 0.5"/>
+	</material>
+
 	<material name="white">
 		<color rgba="1.0 1.0 1.0 1.0"/>
 	</material>
