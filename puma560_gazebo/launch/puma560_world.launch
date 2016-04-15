@@ -17,9 +17,13 @@
     <arg name="headless" value="$(arg headless)"/>
   </include>
 
-  <!-- Load the URDF into the ROS Parameter Server -->
+  <!-- Load the URDF into the ROS Parameter Server Indigo-->
   <param name="robot_description"
-	 command="$(find xacro)/xacro.py '$(find puma560_description)/urdf/puma560_v4.xacro'" />
+	 command="cat $(find puma560_description)/urdf/puma560_v4.urdf" />
+   
+  <!-- Load the URDF into the ROS Parameter Server Jade-->
+  <!--param name="robot_description"
+   command="$(find xacro)/xacro.py '$(find puma560_description)/urdf/puma560_v4.xacro'" /-->
 
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" args="-urdf -model puma560 -param robot_description "/>
