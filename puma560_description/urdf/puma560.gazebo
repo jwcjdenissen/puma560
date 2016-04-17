@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <robot>
 
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/puma560</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
   <!-- Base link-->
   <gazebo reference="puma_base">
     <material>Gazebo/Grey</material>

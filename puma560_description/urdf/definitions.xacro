@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot name="puma560" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Inertia parameters 
+  mass[kg] and center of mass[m] 
+  inertia_diagonal defined as {Ixx Iyy Izz}[kg.m^2]
+  inertia_off_diagonal defined as {Ixy Ixz Iyz}[kg.m^2]
+  -->
+
+<xacro:macro 
+  name="general_inertia_definition" 
+  params="mass center_of_mass inertia_diagonal inertia_off_diagonal">
+  <inertial>
+    <origin 
+      xyz="${center_of_mass[0]} ${center_of_mass[1]} ${center_of_mass[2]}" 
+      rpy="${center_of_mass[3]} ${center_of_mass[4]} ${center_of_mass[5]}"/>
+    <mass 
+      value="${mass}"/>
+    <inertia 
+      ixx="${inertia_diagonal[0]}"  
+      ixy="${inertia_off_diagonal[0]}" 
+      ixz="${inertia_off_diagonal[1]}" 
+      iyy="${inertia_diagonal[1]}"  
+      iyz="${inertia_off_diagonal[2]}"
+      izz="${inertia_diagonal[2]}"
+      />
+    </inertial>
+  </xacro:macro>
+
+  <!-- Inertia parameters 
+  density[kg/m^3], volume[m^3] and center of mass[m]
+  inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
+  inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
+  -->
+
+  <xacro:macro 
+    name="homogeneous_inertia_definition_" 
+    params="density volume center_of_mass  inertia_diagonal inertia_off_diagonal">
+  <inertial>
+    <origin 
+      xyz="${center_of_mass[0]} ${center_of_mass[1]} ${center_of_mass[2]}" 
+      rpy="${center_of_mass[3]} ${center_of_mass[4]} ${center_of_mass[5]}"/>
+    <mass value="${density * volume}"/>
+    <inertia 
+      ixx="${density * volume * inertia_diagonal[0]}"  
+      ixy="${density * volume * inertia_off_diagonal[0]}" 
+      ixz="${density * volume * inertia_off_diagonal[1]}" 
+      iyy="${density * volume * inertia_diagonal[1]}"  
+      iyz="${density * volume * inertia_off_diagonal[2]}"
+      izz="${density * volume * inertia_diagonal[2]}"
+      />
+    </inertial>
+  </xacro:macro>
+
+</robot>
