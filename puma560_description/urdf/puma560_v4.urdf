@@ -279,7 +279,18 @@
       <mass value="0.07741"/>
       <inertia ixx="2e-05" ixy="0" ixz="0" iyy="4e-05" iyz="0" izz="5e-05"/>
     </inertial>
-  </link>
+  </link>  
+  
+  <transmission name="tranmission_1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="link_1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="actuator_1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 </robot>
 <!--     Parameters for uniform body 
     <xacro:general_inertia_definition
