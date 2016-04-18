@@ -42,12 +42,12 @@
       rpy="${center_of_mass[3]} ${center_of_mass[4]} ${center_of_mass[5]}"/>
     <mass value="${density * volume}"/>
     <inertia 
-      ixx="${density * volume * inertia_diagonal[0]}"  
-      ixy="${density * volume * inertia_off_diagonal[0]}" 
-      ixz="${density * volume * inertia_off_diagonal[1]}" 
-      iyy="${density * volume * inertia_diagonal[1]}"  
-      iyz="${density * volume * inertia_off_diagonal[2]}"
-      izz="${density * volume * inertia_diagonal[2]}"
+      ixx="${density/1000 * inertia_diagonal[0]}"  
+      ixy="${density/1000 * inertia_off_diagonal[0]}" 
+      ixz="${density/1000 * inertia_off_diagonal[1]}" 
+      iyy="${density/1000 * inertia_diagonal[1]}"  
+      iyz="${density/1000 * inertia_off_diagonal[2]}"
+      izz="${density/1000 * inertia_diagonal[2]}"
       />
     </inertial>
   </xacro:macro>

@@ -77,210 +77,265 @@
       density[kg/m^3], volume[m^3] and center of mass[m]
       inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
       inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
-      -->
-      <xacro:homogeneous_inertia_definition
-        density="1000"
-        volume="0.01578673" 
-        center_of_mass="${[-0.000000, 0.021960, -0.356146, 0, 0, 0]}"
-        inertia_diagonal="${[0.55024, 0.50424, 0.16071]}"
-        inertia_off_diagonal="${[0, 0, 0.02216]}"
-        />
+    -->
+    <xacro:homogeneous_inertia_definition
+      density="2700"
+      volume="0.01578673" 
+      center_of_mass="${[-0.000000, 0.021960, -0.356146, 0, 0, 0]}"
+      inertia_diagonal="${[0.55024, 0.50424, 0.16071]}"
+      inertia_off_diagonal="${[0, 0, 0.02216]}"
+      />
 
-      </link>
+    </link>
 
-      <joint name="link_1" type="continuous">
-        <parent link="puma_base"/>
-        <child link="puma_link_1"/>
-        <origin xyz="0 0 ${offset_z_link_1}" rpy="0 0 0" />
-        <axis xyz="0 0 1" />
-      </joint>
+    <joint name="joint_1" type="continuous">
+      <parent link="puma_base"/>
+      <child link="puma_link_1"/>
+      <origin xyz="0 0 ${offset_z_link_1}" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
 
-      <link name="puma_link_1">
+    <link name="puma_link_1">
 
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_1_visual}" />
-          </geometry>
-          <material name="metal"/>
-        </visual>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_1_visual}" />
+        </geometry>
+        <material name="metal"/>
+      </visual>
 
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_1_collision}" />
-          </geometry>
-        </collision>
-
-      <!-- Create inertia matrix from parameters for homogeneous parts : 
-      density[kg/m^3], volume[m^3] and center of mass[m]
-      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
-      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
-      -->
-      <xacro:homogeneous_inertia_definition
-        density="1000"
-        volume="0.00443413" 
-        center_of_mass="${[-0.000000, 0.022503, -0.002794, 0, 0, 0]}"
-        inertia_diagonal="${[0.02733, 0.01332, 0.02716]}"
-        inertia_off_diagonal="${[0, 0, -0.00028 ]}"
-        />
-
-      </link>
-
-      <joint name="link_2" type="continuous">
-        <parent link="puma_link_1"/>
-        <child link="puma_link_2"/>
-        <origin xyz="0 ${offset_y_link_2} 0" rpy="${Pi/2} 0 0" />
-        <axis xyz="0 0 1" />
-      </joint>
-
-      <link name="puma_link_2">
-
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_2_visual}" />
-          </geometry>
-          <material name="metal"/>
-        </visual>
-
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_2_collision}" />
-          </geometry>
-        </collision>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_1_collision}" />
+        </geometry>
+      </collision>
 
       <!-- Create inertia matrix from parameters for homogeneous parts : 
       density[kg/m^3], volume[m^3] and center of mass[m]
       inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
       inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
-      -->
-      <xacro:homogeneous_inertia_definition
-        density="1000"
-        volume="0.01684661" 
-        center_of_mass="${[0.082741, 0.000047, -0.047642, 0, 0, 0]}"
-        inertia_diagonal="${[0.09723, 0.59657, 0.65976]}"
-        inertia_off_diagonal="${[0.00001, 0.00435, -0.00005]}"
-        />
+    -->
+    <xacro:homogeneous_inertia_definition
+      density="2700"
+      volume="0.00443413" 
+      center_of_mass="${[-0.000000, 0.022503, -0.002794, 0, 0, 0]}"
+      inertia_diagonal="${[0.02733, 0.01332, 0.02716]}"
+      inertia_off_diagonal="${[0, 0, -0.00028 ]}"
+      />
 
-      </link>
+    </link>
 
-      <joint name="link_3" type="continuous">
-        <parent link="puma_link_2"/>
-        <child link="puma_link_3"/>
-        <origin xyz="${offset_x_link_3} 0 0" rpy="0 0 0" />
-        <axis xyz="0 0 1" />
-      </joint>
+    <joint name="joint_2" type="continuous">
+      <parent link="puma_link_1"/>
+      <child link="puma_link_2"/>
+      <origin xyz="0 ${offset_y_link_2} 0" rpy="${Pi/2} 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
 
-      <link name="puma_link_3">
+    <link name="puma_link_2">
 
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_3_visual}" />
-          </geometry>
-          <material name="metal"/>
-        </visual>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_2_visual}" />
+        </geometry>
+        <material name="metal"/>
+      </visual>
 
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_3_collision}" />
-          </geometry>
-        </collision>
-
-      <!-- Create inertia matrix from parameters for homogeneous parts : 
-      density[kg/m^3], volume[m^3] and center of mass[m]
-      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
-      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
-      -->
-      <xacro:homogeneous_inertia_definition
-        density="1000"
-        volume="0.00460251" 
-        center_of_mass="${[0.088782, -0.000001, 0.038098, 0, 0, 0]}"
-        inertia_diagonal="${[0.00919, 0.08262, 0.08735]}"
-        inertia_off_diagonal="${[0, 0.00001, 0]}"
-        />
-
-      </link>
-
-      <joint name="link_4" type="continuous">
-        <parent link="puma_link_3"/>
-        <child link="puma_link_4"/>
-        <origin xyz="${offset_x_link_4} 0 ${offset_z_link_4} " rpy="0 ${Pi/2} 0" />
-        <axis xyz="0 0 1" />
-      </joint>
-
-      <link name="puma_link_4">
-
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_4_visual}" />
-          </geometry>
-          <material name="orange"/>
-        </visual>
-
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_4_collision}" />
-          </geometry>
-        </collision>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_2_collision}" />
+        </geometry>
+      </collision>
 
       <!-- Create inertia matrix from parameters for homogeneous parts : 
       density[kg/m^3], volume[m^3] and center of mass[m]
       inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
       inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
-      -->
-      <xacro:homogeneous_inertia_definition
-        density="1000"
-        volume="0.00047079" 
-        center_of_mass="${[-0.000000, -0.000000, 0.047887, 0, 0, 0]}"
-        inertia_diagonal="${[0.00077, 0.00074, 0.00047]}"
-        inertia_off_diagonal="${[0, 0, 0]}"
-        />
+    -->
+    <xacro:homogeneous_inertia_definition
+      density="2700"
+      volume="0.01684661" 
+      center_of_mass="${[0.082741, 0.000047, -0.047642, 0, 0, 0]}"
+      inertia_diagonal="${[0.09723, 0.59657, 0.65976]}"
+      inertia_off_diagonal="${[0.00001, 0.00435, -0.00005]}"
+      />
 
-      </link>
+    </link>
 
-      <joint name="link_5" type="continuous">
-        <parent link="puma_link_4"/>
-        <child link="puma_link_5"/>
-        <origin xyz="0 0 ${offset_z_link_5} " rpy="0 ${-Pi/2} ${-Pi/2}" />
-        <axis xyz="0 0 1" />
-      </joint>
+    <joint name="joint_3" type="continuous">
+      <parent link="puma_link_2"/>
+      <child link="puma_link_3"/>
+      <origin xyz="${offset_x_link_3} 0 0" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
 
-      <link name="puma_link_5">
+    <link name="puma_link_3">
 
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_5_visual}" />
-          </geometry>
-          <material name="orange"/>
-        </visual>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_3_visual}" />
+        </geometry>
+        <material name="metal"/>
+      </visual>
 
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <mesh filename="${puma_link_5_collision}" />
-          </geometry>
-        </collision>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_3_collision}" />
+        </geometry>
+      </collision>
 
       <!-- Create inertia matrix from parameters for homogeneous parts : 
       density[kg/m^3], volume[m^3] and center of mass[m]
       inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
       inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
-      -->
-      <xacro:homogeneous_inertia_definition
-        density="1000"
-        volume="0.00007741" 
-        center_of_mass="${[0.010974, 0.000000, 0.000000, 0, 0, 0]}"
-        inertia_diagonal="${[0.00002, 0.00004, 0.00005]}"
-        inertia_off_diagonal="${[0, 0, 0]}"
-        />
+    -->
+    <xacro:homogeneous_inertia_definition
+      density="2700"
+      volume="0.00460251" 
+      center_of_mass="${[0.088782, -0.000001, 0.038098, 0, 0, 0]}"
+      inertia_diagonal="${[0.00919, 0.08262, 0.08735]}"
+      inertia_off_diagonal="${[0, 0.00001, 0]}"
+      />
 
-      </link>
+    </link>
 
-    </robot>
+    <joint name="joint_4" type="continuous">
+      <parent link="puma_link_3"/>
+      <child link="puma_link_4"/>
+      <origin xyz="${offset_x_link_4} 0 ${offset_z_link_4} " rpy="0 ${Pi/2} 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <link name="puma_link_4">
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_4_visual}" />
+        </geometry>
+        <material name="orange"/>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_4_collision}" />
+        </geometry>
+      </collision>
+
+      <!-- Create inertia matrix from parameters for homogeneous parts : 
+      density[kg/m^3], volume[m^3] and center of mass[m]
+      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
+      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
+    -->
+    <xacro:homogeneous_inertia_definition
+      density="2700"
+      volume="0.00047079" 
+      center_of_mass="${[-0.000000, -0.000000, 0.047887, 0, 0, 0]}"
+      inertia_diagonal="${[0.00077, 0.00074, 0.00047]}"
+      inertia_off_diagonal="${[0, 0, 0]}"
+      />
+
+    </link>
+
+    <joint name="joint_5" type="continuous">
+      <parent link="puma_link_4"/>
+      <child link="puma_link_5"/>
+      <origin xyz="0 0 ${offset_z_link_5} " rpy="0 ${-Pi/2} ${-Pi/2}" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <link name="puma_link_5">
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_5_visual}" />
+        </geometry>
+        <material name="orange"/>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${puma_link_5_collision}" />
+        </geometry>
+      </collision>
+
+      <!-- Create inertia matrix from parameters for homogeneous parts : 
+      density[kg/m^3], volume[m^3] and center of mass[m]
+      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
+      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
+    -->
+    <xacro:homogeneous_inertia_definition
+      density="2700"
+      volume="0.00007741" 
+      center_of_mass="${[0.010974, 0.000000, 0.000000, 0, 0, 0]}"
+      inertia_diagonal="${[0.00002, 0.00004, 0.00005]}"
+      inertia_off_diagonal="${[0, 0, 0]}"
+      />
+
+    </link>
+
+    <transmission name="puma_joint_1_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_1">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="puma_joint_1_actuator">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="puma_joint_2_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_2">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="puma_joint_2_actuator">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="puma_joint_3_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_3">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="puma_joint_3_actuator">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="puma_joint_4_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_4">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="puma_joint_4_actuator">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="puma_joint_5_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_5">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="puma_joint_5_actuator">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </robot>
