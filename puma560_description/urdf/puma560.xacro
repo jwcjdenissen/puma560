@@ -3,10 +3,10 @@
 <!-- UNIMATE Puma 560 Manipulator -->
 <robot name="puma560" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- Constants for robot dimensions -->
+  <!-- Some constants -->
   <xacro:property name="Pi" value="${3.1415926535897931}"/>
 
-  <!-- Geometric parameters for base -->
+  <!-- Geometric parameters for Puma 560-->
   <xacro:property name="offset_z_base" value="${0.54864}"/>
   <xacro:property name="offset_z_link_1" value="${0.07493}"/>
   <xacro:property name="offset_y_link_2" value="${0.14224 + 0.0254}"/>
@@ -15,13 +15,35 @@
   <xacro:property name="offset_z_link_4" value="${0.0381}"/>
   <xacro:property name="offset_z_link_5" value="${0.0803}"/>
 
-  <!-- Import Rviz colors -->
+  <!-- Meshes location directory -->
+  <xacro:property name="mesh_path" value="package://puma560_description/meshes"/>
+
+  <!-- File suffix for collision parts -->
+  <xacro:property name="collision_suffix" value="_collision"/>
+
+  <!-- Visual mesh paths -->
+  <xacro:property name="puma_base_visual" value="${mesh_path}/puma_base.stl"/>
+  <xacro:property name="puma_link_1_visual" value="${mesh_path}/puma_link_1.stl"/>
+  <xacro:property name="puma_link_2_visual" value="${mesh_path}/puma_link_2.stl"/>
+  <xacro:property name="puma_link_3_visual" value="${mesh_path}/puma_link_3.stl"/>
+  <xacro:property name="puma_link_4_visual" value="${mesh_path}/puma_link_4.stl"/>
+  <xacro:property name="puma_link_5_visual" value="${mesh_path}/puma_link_5.stl"/>
+
+  <!-- Collsion mesh paths -->
+  <xacro:property name="puma_base_collision" value="${mesh_path}/puma_base${collision_suffix}.stl"/>
+  <xacro:property name="puma_link_1_collision" value="${mesh_path}/puma_link_1${collision_suffix}.stl"/>
+  <xacro:property name="puma_link_2_collision" value="${mesh_path}/puma_link_2${collision_suffix}.stl"/>
+  <xacro:property name="puma_link_3_collision" value="${mesh_path}/puma_link_3${collision_suffix}.stl"/>
+  <xacro:property name="puma_link_4_collision" value="${mesh_path}/puma_link_4${collision_suffix}.stl"/>
+  <xacro:property name="puma_link_5_collision" value="${mesh_path}/puma_link_5${collision_suffix}.stl"/>
+
+  <!-- Some esthetic color definitions -->
   <xacro:include filename="$(find puma560_description)/urdf/materials.xacro" />
 
-  <!-- Import xacro macro definition -->
+  <!-- Some xacro macro definitions -->
   <xacro:include filename="$(find puma560_description)/urdf/definitions.xacro" />
 
-  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <!-- Import Gazebo components for now colors and control plugin -->
   <xacro:include filename="$(find puma560_description)/urdf/puma560.gazebo" />
 
   <!-- Link definitions -->
@@ -39,7 +61,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://puma560_description/meshes/puma_base.stl" />
+        <mesh filename="${puma_base_visual}" />
       </geometry>
       <material name="grey"/>
     </visual>
@@ -47,26 +69,22 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://puma560_description/meshes/puma_base_collision.stl" />
+        <mesh filename="${puma_base_collision}" />
       </geometry>
     </collision>
 
-    <!--     Parameters for uniform aluminium body -->
-    <xacro:general_inertia_definition
-      mass="42.62416" 
-      center_of_mass="${[-0.000000, 0.021960, -0.356146, 0, 0, 0]}"
-      inertia_diagonal="${[1.48565, 1.36144, 0.43392]}"
-      inertia_off_diagonal="${[0, 0, 0.05984]}"
-      />
-
-      <!--     Parameters for uniform generic body -->
-      <xacro:general_inertia_definition
-        mass="15.78673" 
+      <!-- Create inertia matrix from parameters for homogeneous parts : 
+      density[kg/m^3], volume[m^3] and center of mass[m]
+      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
+      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
+      -->
+      <xacro:homogeneous_inertia_definition
+        density="1000"
+        volume="0.01578673" 
         center_of_mass="${[-0.000000, 0.021960, -0.356146, 0, 0, 0]}"
         inertia_diagonal="${[0.55024, 0.50424, 0.16071]}"
         inertia_off_diagonal="${[0, 0, 0.02216]}"
         />
-
 
       </link>
 
@@ -82,7 +100,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_1.stl" />
+            <mesh filename="${puma_link_1_visual}" />
           </geometry>
           <material name="metal"/>
         </visual>
@@ -90,27 +108,18 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_1_collision.stl" />
+            <mesh filename="${puma_link_1_collision}" />
           </geometry>
         </collision>
 
-      <!-- Inertia parameters 
-      mass and center of mass (center_of_mass)
-      inertia_diagonal defined as [Ixx Iyy Izz]
-      inertia_off_diagonal defined as [Ixy Ixz Iyz]
-    -->
-
-    <!--     Parameters for uniform aluminium body -->
-    <xacro:general_inertia_definition
-      mass="11.97216" 
-      center_of_mass="${[-0.000000, 0.022503, -0.002794, 0, 0, 0]}"
-      inertia_diagonal="${[0.07379, 0.03595, 0.07334]}"
-      inertia_off_diagonal="${[0, 0, -0.00075]}"
-      />
-
-      <!--     Parameters for uniform generic body -->
-      <xacro:general_inertia_definition
-        mass="4.43413" 
+      <!-- Create inertia matrix from parameters for homogeneous parts : 
+      density[kg/m^3], volume[m^3] and center of mass[m]
+      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
+      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
+      -->
+      <xacro:homogeneous_inertia_definition
+        density="1000"
+        volume="0.00443413" 
         center_of_mass="${[-0.000000, 0.022503, -0.002794, 0, 0, 0]}"
         inertia_diagonal="${[0.02733, 0.01332, 0.02716]}"
         inertia_off_diagonal="${[0, 0, -0.00028 ]}"
@@ -130,7 +139,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_2.stl" />
+            <mesh filename="${puma_link_2_visual}" />
           </geometry>
           <material name="metal"/>
         </visual>
@@ -138,27 +147,18 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_2_collision.stl" />
+            <mesh filename="${puma_link_2_collision}" />
           </geometry>
         </collision>
 
-      <!-- Inertia parameters 
-      mass and center of mass (center_of_mass)
-      inertia_diagonal defined as [Ixx Iyy Izz]
-      inertia_off_diagonal defined as [Ixy Ixz Iyz]
-    -->
-
-    <!--     Parameters for uniform aluminium body -->
-    <xacro:general_inertia_definition
-      mass="45.48585" 
-      center_of_mass="${[0.082741, 0.000047, -0.047642, 0, 0, 0]}"
-      inertia_diagonal="${[0.26252, 1.61075, 1.78135]}"
-      inertia_off_diagonal="${[0.00002, 0.26252, -0.00013]}"
-      />
-
-      <!--     Parameters for uniform generic body -->
-      <xacro:general_inertia_definition
-        mass="16.84661" 
+      <!-- Create inertia matrix from parameters for homogeneous parts : 
+      density[kg/m^3], volume[m^3] and center of mass[m]
+      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
+      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
+      -->
+      <xacro:homogeneous_inertia_definition
+        density="1000"
+        volume="0.01684661" 
         center_of_mass="${[0.082741, 0.000047, -0.047642, 0, 0, 0]}"
         inertia_diagonal="${[0.09723, 0.59657, 0.65976]}"
         inertia_off_diagonal="${[0.00001, 0.00435, -0.00005]}"
@@ -178,7 +178,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_3.stl" />
+            <mesh filename="${puma_link_3_visual}" />
           </geometry>
           <material name="metal"/>
         </visual>
@@ -186,27 +186,18 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_3_collision.stl" />
+            <mesh filename="${puma_link_3_collision}" />
           </geometry>
         </collision>
 
-      <!-- Inertia parameters 
-      mass and center of mass (center_of_mass)
-      inertia_diagonal defined as [Ixx Iyy Izz]
-      inertia_off_diagonal defined as [Ixy Ixz Iyz]
-    -->
-
-    <!--     Parameters for uniform aluminium body -->
-    <xacro:general_inertia_definition
-      mass="12.42678" 
-      center_of_mass="${[0.088782, -0.000001, 0.038098, 0, 0, 0]}"
-      inertia_diagonal="${[0.02482, 0.22306, 0.23586]}"
-      inertia_off_diagonal="${[0, 0, 0]}"
-      />
-
-      <!--     Parameters for uniform generic body -->
-      <xacro:general_inertia_definition
-        mass="4.60251" 
+      <!-- Create inertia matrix from parameters for homogeneous parts : 
+      density[kg/m^3], volume[m^3] and center of mass[m]
+      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
+      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
+      -->
+      <xacro:homogeneous_inertia_definition
+        density="1000"
+        volume="0.00460251" 
         center_of_mass="${[0.088782, -0.000001, 0.038098, 0, 0, 0]}"
         inertia_diagonal="${[0.00919, 0.08262, 0.08735]}"
         inertia_off_diagonal="${[0, 0.00001, 0]}"
@@ -226,7 +217,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_4.stl" />
+            <mesh filename="${puma_link_4_visual}" />
           </geometry>
           <material name="orange"/>
         </visual>
@@ -234,31 +225,22 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_4_collision.stl" />
+            <mesh filename="${puma_link_4_collision}" />
           </geometry>
         </collision>
 
-      <!-- Inertia parameters 
-      mass and center of mass (center_of_mass)
-      inertia_diagonal defined as [Ixx Iyy Izz]
-      inertia_off_diagonal defined as [Ixy Ixz Iyz]
-    -->
-
-    <!--     Parameters for uniform aluminium body -->
-    <xacro:general_inertia_definition
-      mass="1.27113" 
-      center_of_mass="${[-0.000000, -0.000000, 0.047887, 0, 0, 0]}"
-      inertia_diagonal="${[0.00209, 0.00199, 0.00126]}"
-      inertia_off_diagonal="${[0, 0, 0]}"
-      />
-
-      <!--     Parameters for uniform generic body -->
-    <xacro:general_inertia_definition
-      mass="0.47079" 
-      center_of_mass="${[-0.000000, -0.000000, 0.047887, 0, 0, 0]}"
-      inertia_diagonal="${[0.00077, 0.00074, 0.00047]}"
-      inertia_off_diagonal="${[0, 0, 0]}"
-      />
+      <!-- Create inertia matrix from parameters for homogeneous parts : 
+      density[kg/m^3], volume[m^3] and center of mass[m]
+      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
+      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
+      -->
+      <xacro:homogeneous_inertia_definition
+        density="1000"
+        volume="0.00047079" 
+        center_of_mass="${[-0.000000, -0.000000, 0.047887, 0, 0, 0]}"
+        inertia_diagonal="${[0.00077, 0.00074, 0.00047]}"
+        inertia_off_diagonal="${[0, 0, 0]}"
+        />
 
       </link>
 
@@ -274,7 +256,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_5.stl" />
+            <mesh filename="${puma_link_5_visual}" />
           </geometry>
           <material name="orange"/>
         </visual>
@@ -282,41 +264,23 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://puma560_description/meshes/puma_link_5_collision.stl" />
+            <mesh filename="${puma_link_5_collision}" />
           </geometry>
         </collision>
 
-      <!-- Inertia parameters 
-      mass and center of mass (center_of_mass)
-      inertia_diagonal defined as [Ixx Iyy Izz]
-      inertia_off_diagonal defined as [Ixy Ixz Iyz]
-    -->
-
-    <!--     Parameters for uniform aluminium body -->
-    <xacro:general_inertia_definition
-      mass="0.20900" 
-      center_of_mass="${[0.010974, 0.000000, 0.000000, 0, 0, 0]}"
-      inertia_diagonal="${[0.00005, 0.00012, 0.00012]}"
-      inertia_off_diagonal="${[0, 0, 0]}"
-      />
-
-      <!--     Parameters for uniform generic body -->
-    <xacro:general_inertia_definition
-      mass="0.07741" 
-      center_of_mass="${[0.010974, 0.000000, 0.000000, 0, 0, 0]}"
-      inertia_diagonal="${[0.00002, 0.00004, 0.00005]}"
-      inertia_off_diagonal="${[0, 0, 0]}"
-      />
+      <!-- Create inertia matrix from parameters for homogeneous parts : 
+      density[kg/m^3], volume[m^3] and center of mass[m]
+      inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
+      inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
+      -->
+      <xacro:homogeneous_inertia_definition
+        density="1000"
+        volume="0.00007741" 
+        center_of_mass="${[0.010974, 0.000000, 0.000000, 0, 0, 0]}"
+        inertia_diagonal="${[0.00002, 0.00004, 0.00005]}"
+        inertia_off_diagonal="${[0, 0, 0]}"
+        />
 
       </link>
 
     </robot>
-
-    <!--     Parameters for uniform body 
-    <xacro:general_inertia_definition
-      mass="0" 
-      center_of_mass="${[0, 0, 0, 0, 0, 0]}"
-      inertia_diagonal="${[0, 0, 0]}"
-      inertia_off_diagonal="${[0, 0, 0]}"
-      />
-    -->

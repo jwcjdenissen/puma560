@@ -38,11 +38,11 @@
 	</material>
 
 	<material name="metal">
-		<color rgba="${211/255} ${211/255} ${211/255} 1" />
+		<color rgba="${211/255} ${211/255} ${211/255} 1.0" />
 	</material>
 
 	<material name="wood">
-		<color rgba="${205/255} ${133/255} ${63/255} 1" />
+		<color rgba="${205/255} ${133/255} ${63/255} 1.0" />
 	</material>
 
 </robot>

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot name="puma560" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- Inertia parameters 
+
+  <!-- Create inertia matrix from parameters for general parts :
   mass[kg] and center of mass[m] 
   inertia_diagonal defined as {Ixx Iyy Izz}[kg.m^2]
   inertia_off_diagonal defined as {Ixy Ixz Iyz}[kg.m^2]
@@ -26,14 +27,14 @@
     </inertial>
   </xacro:macro>
 
-  <!-- Inertia parameters 
+  <!-- Create inertia matrix from parameters for homogeneous parts : 
   density[kg/m^3], volume[m^3] and center of mass[m]
   inertia_diagonal defined as {Ixx Iyy Izz}[m^4]
   inertia_off_diagonal defined as {Ixy Ixz Iyz}[m^4]
   -->
 
   <xacro:macro 
-    name="homogeneous_inertia_definition_" 
+    name="homogeneous_inertia_definition" 
     params="density volume center_of_mass  inertia_diagonal inertia_off_diagonal">
   <inertial>
     <origin 
