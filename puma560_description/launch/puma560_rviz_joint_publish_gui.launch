@@ -4,7 +4,18 @@
 	<param name="robot_description"
 	command="$(find xacro)/xacro --inorder '$(find puma560_description)/urdf/puma560.xacro'" />
 
-    <node name="myown_state_publisher" pkg="puma560_control" type="myown_state_publisher" />
+	<!-- send fake joint values -->
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+	<param name="use_gui" value="TRUE"/>
+    <rosparam>
+    zeros:
+     joint_1: 0.1
+     joint_2: -0.1
+     joint_3: 0.3
+     joint_4: -0.3
+     joint_5: 0.1
+    </rosparam>
+	</node>
 
 	<!-- Combine joint values -->
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>

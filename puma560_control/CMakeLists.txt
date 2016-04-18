@@ -189,5 +189,8 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 include_directories(include ${catkin_INCLUDE_DIRS})
-add_executable(state_publisher src/state_publisher.cpp)
-target_link_libraries(state_publisher ${catkin_LIBRARIES})
+add_executable(myown_state_publisher src/myown_state_publisher.cpp)
+target_link_libraries(myown_state_publisher ${catkin_LIBRARIES})
+
+add_executable(myown_tf_publisher src/myown_tf_publisher.cpp)
+target_link_libraries(myown_tf_publisher ${catkin_LIBRARIES})
