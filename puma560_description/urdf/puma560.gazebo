@@ -12,31 +12,49 @@
   <!-- Base link-->
   <gazebo reference="puma_base">
     <material>Gazebo/Grey</material>
+    <selfCollide>true</selfCollide>
+    <static>false</static>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
   <!-- Link 1 -->
   <gazebo reference="puma_link_1">
     <material>Gazebo/Metal</material>
+    <selfCollide>true</selfCollide>
+    <static>false</static>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
   <!-- Link 2 -->
   <gazebo reference="puma_link_2">
     <material>Gazebo/Metal</material>
+    <selfCollide>true</selfCollide>
+    <static>false</static>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
   <!-- Link 3 -->
   <gazebo reference="puma_link_3">
     <material>Gazebo/Metal</material>
+    <selfCollide>true</selfCollide>
+    <static>false</static>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
   <!-- Link 4 -->
   <gazebo reference="puma_link_4">
     <material>Gazebo/Orange</material>
+    <selfCollide>true</selfCollide>
+    <static>false</static>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
   <!-- Link 5 -->
   <gazebo reference="puma_link_5">
-    <material>Gazebo/Orange</material>
+    <material>Gazebo/Orange</material>    
+    <selfCollide>true</selfCollide>
+    <static>false</static>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
 </robot>
