@@ -1,11 +1,13 @@
 <launch>
 
+ 	<include file="$(find puma560_gazebo)/launch/puma560_world.launch"/>
+
 	<!-- Apply Xacro to create urdf  -->
 	<param name="robot_description"
 	command="$(find xacro)/xacro --inorder '$(find puma560_description)/urdf/puma560.xacro'" />
 
 	<!-- Load joint controller configurations from YAML file to parameter server -->
-  	<rosparam file="$(find puma560_control)/config/puma560_control.yaml" 
+  	<rosparam file="$(find puma560_description)/config/puma560_joint_state_controller.yaml" 
     command="load"/>
 
     <!-- Send joint values with ros parameter server -->

@@ -9,11 +9,11 @@
 	<param name="use_gui" value="TRUE"/>
     <rosparam>
     zeros:
-     joint_1: 0.1
-     joint_2: -0.1
-     joint_3: 0.3
-     joint_4: -0.3
-     joint_5: 0.1
+     joint_1: 0.48869219
+     joint_2: 0.383972435
+     joint_3: -0.610865238
+     joint_4: -0.610865238
+     joint_5: 0.0
     </rosparam>
 	</node>
 

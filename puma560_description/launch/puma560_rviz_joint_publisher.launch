@@ -4,6 +4,7 @@
 	<param name="robot_description"
 	command="$(find xacro)/xacro --inorder '$(find puma560_description)/urdf/puma560.xacro'" />
 
+	<!-- Send joint values with ros myown_state_publisher -->
 	<node name="myown_state_publisher" pkg="puma560_control" type="myown_state_publisher" />
 
 	<!-- Combine joint values -->
