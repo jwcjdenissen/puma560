@@ -1,0 +1,14 @@
+%%
+
+Ts=0.001;
+
+u=input.Data;
+y=output.Data;
+
+system=iddata(y,u,Ts);
+systemN=detrend(system);
+
+w = linspace(0.1,100,2048);
+sys_np=spa(systemN,[],w);
+
+%%

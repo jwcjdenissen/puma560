@@ -93,6 +93,7 @@
       <child link="puma_link_1"/>
       <origin xyz="0 0 ${offset_z_link_1}" rpy="0 0 0" />
       <axis xyz="0 0 1" />
+      <dynamics damping="10.0" friction="0.0"/>
     </joint>
 
     <link name="puma_link_1">
@@ -132,6 +133,7 @@
       <child link="puma_link_2"/>
       <origin xyz="0 ${offset_y_link_2} 0" rpy="${Pi/2} 0 0" />
       <axis xyz="0 0 1" />
+      <dynamics damping="1.0" friction="0.0"/>
     </joint>
 
     <link name="puma_link_2">
@@ -171,6 +173,7 @@
       <child link="puma_link_3"/>
       <origin xyz="${offset_x_link_3} 0 0" rpy="0 0 0" />
       <axis xyz="0 0 1" />
+      <dynamics damping="0.0001" friction="0.0"/>
     </joint>
 
     <link name="puma_link_3">
@@ -210,6 +213,7 @@
       <child link="puma_link_4"/>
       <origin xyz="${offset_x_link_4} 0 ${offset_z_link_4} " rpy="0 ${Pi/2} 0" />
       <axis xyz="0 0 1" />
+      <dynamics damping="0.0001" friction="0.0"/>
     </joint>
 
     <link name="puma_link_4">
@@ -249,6 +253,7 @@
       <child link="puma_link_5"/>
       <origin xyz="0 0 ${offset_z_link_5} " rpy="0 ${-Pi/2} ${-Pi/2}" />
       <axis xyz="0 0 1" />
+      <dynamics damping="0.0001" friction="0.0"/>
     </joint>
 
     <link name="puma_link_5">
